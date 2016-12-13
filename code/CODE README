@@ -1,0 +1,79 @@
+
+---------------------------------------------------
+Os arquivos devem ser executados na seguinte ordem:
+	
+	montador1 -> simulador1
+	montador1/montador2 -> ligador (caso o programa tenha módulos) ->  simulador2
+		
+
+Os códigos foram feitos para que a entrada de um seja a saída do outro. 
+Ambos os montadores processam módulo, entretanto o primeiro segmenta arquivos de pre-processamento e o segundo monta mais de um arquivo ao mesmo tempo.
+
+
+---------------------------------------------------
+O montador1 (feito para analisar preprocessamento) é usado da seguinte forma:
+
+	1 - Compile o programa utilizando o comando
+
+		$ g++ montador.cpp -o montador
+	
+	2 - Para rodar o programa devem ser especificados um arquivo de entrada (.asm) e um de saída além do modo de  operação (-p -m ou -o).
+		
+		$ ./montador [arquivo de entrada] [arquivo de saida] [operaçao]
+
+		* Modo de Pré-Processamento (operação: -p): Coloca a extensão .pre no arquivo de saída e avalia as diretivas EQU e IF e retira comentários.
+		
+		$ ./montador [arquivo de entrada] [arquivo de saida] -p
+
+		* Modo de Processamento (operação: -m): Coloca a extensão .mcr no arquivo de saída, avalia somente as expressões EQU e IF, retira comentários e expande MACROS. 
+	
+		$ ./montador [arquivo de entrada] [arquivo de saida] -m
+
+		* Modo de Montagem (operação: -o): Coloca a extensão .o no arquivo de saída, e monta o programa.
+
+		$ ./montador [arquivo de entrada] [arquivo de saida] -o
+
+
+---------------------------------------------------
+O montador2 (feito para montar mais de um arquivo ao mesmo tempo) é usado da seguinte forma:
+		
+
+	1 - Compile o programa utilizando o comando
+
+		$ g++ montador.cpp -o montador
+
+	
+	2 - Para rodar o programa devem ser especificados um à três arquivos de entrada (.asm).
+
+		$ ./montador [arquivo de entrada 1] [arquivo de entrada 2] [arquivo de entrada 3]
+
+
+---------------------------------------------------
+Modo de uso do ligador:
+		
+	1 - Compile o programa utilizando o comando
+
+		$ g++ ligador.cpp -o ligador
+
+
+	2 - Para rodar o programa devem ser especificadso um à três arquivos de entradas (.o)
+		
+		$ ./ligador [arquivo de entrada 1] [arquivo de entrada 2] [arquivo de entrada 3]
+
+
+---------------------------------------------------
+Modo de uso do simulador (serve tanto para o 1 quanto para o 2):
+
+		
+	1 - Compile o programa utilizando o comando
+
+		$ g++ simulador.cpp -o simulador
+
+	2 - Para rodar o programa deve ser especificado um arquivo de entrada (.o)
+
+		
+		$ ./simulador [arquivo de entrada]
+
+
+
+
